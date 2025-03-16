@@ -13,13 +13,12 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        $this->call([RoleSeeder::class]);
+        $this->call([
+            RoleSeeder::class,
+            UserSeeder::class,
+            ClientSeeder::class,
+        ]);
 
-        User::factory(15)->create();
-        User::factory()->create([
-            'first_name' => 'Admin',
-            'email' => 'admin@example.com',
-            'password' => 'Admin@123',
-        ])->syncRoles(RoleEnum::ADMIN);
+        
     }
 }

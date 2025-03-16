@@ -15,7 +15,6 @@ class UserController extends Controller
      */
     public function index()
     {
-        $this->isAdmin();
         $users = User::paginate(10);
         return view('users.index', compact('users'));
     }
@@ -25,7 +24,6 @@ class UserController extends Controller
      */
     public function create()
     {
-        $this->isAdmin();
 
         return view('users.create');
     }
@@ -35,7 +33,6 @@ class UserController extends Controller
      */
     public function store(StoreUserRequest $request)
     {
-        $this->isAdmin();
 
         User::create($request->validated());
         return redirect()->route('users.index')->with('message', 'User created successfully');
@@ -54,7 +51,6 @@ class UserController extends Controller
      */
     public function edit(User $user)
     {
-        $this->isAdmin();
 
         return view('users.edit', compact('user'));
     }
@@ -64,7 +60,6 @@ class UserController extends Controller
     */
     public function update(UpdateUserRequest $request, User $user)
     {
-        $this->isAdmin();
 
         $user->update($request->validated());
         return redirect()->route('users.index')->with('message', 'User updated successfully');
@@ -75,16 +70,8 @@ class UserController extends Controller
      */
     public function destroy(User $user)
     {
-        $this->isAdmin();
 
         $user->delete();
         return redirect()->route('users.index')->with('message', 'User updated successfully');
-    }
-
-    private function isAdmin()
-    {
-        if (!auth()->user()->hasRole(RoleEnum::ADMIN->value)) {
-            abort(403, 'Unauthorized action.'); // Abort with a 403 Forbidden status if not an admin
-        }
     }
 }
