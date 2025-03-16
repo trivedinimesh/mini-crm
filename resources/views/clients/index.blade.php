@@ -1,7 +1,7 @@
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('clients') }}
+            {{ __('Clients') }}
         </h2>
     </x-slot>
 
@@ -57,7 +57,7 @@
                             </tbody>
                         </table>
         
-                        <div class="px-3 py-3">
+                        <div class="px-3 py-3 pagination">
                             {{ $clients->links() }}
                         </div>
                     </div>

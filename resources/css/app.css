@@ -1,3 +1,9 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.pagination * {
+    background-color: white !important;
+    color: black !important;
+    border-color: #ddd !important;
+}
