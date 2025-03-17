@@ -36,7 +36,7 @@
                         
                         <!-- Company Name -->
                         <div>
-                            <x-input-label for="company_address" :value="__('Conpany Name')" />
+                            <x-input-label for="company_name" :value="__('Company Name')" />
                             <x-text-input id="company_name" class="block mt-1 w-full" type="text" name="company_name" :value="old('company_name' $client->company_name)" required autofocus autocomplete="company_name" />
                             <x-input-error :messages="$errors->get('company_name')" class="mt-2" />
                         </div>

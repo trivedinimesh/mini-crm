@@ -1,0 +1,35 @@
+<?php
+
+namespace App\Http\Requests;
+
+use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
+use App\StatusEnum;
+
+class UpdateProjectRequest extends FormRequest
+{
+    /**
+     * Determine if the user is authorized to make this request.
+     */
+    public function authorize(): bool
+    {
+        return true;
+    }
+
+    /**
+     * Get the validation rules that apply to the request.
+     *
+     * @return array<string, \Illuminate\Contracts\Validation\ValidationRule|array<mixed>|string>
+     */
+    public function rules(): array
+    {
+        return [
+            'title' => ['nullable','string','max:255'],
+            'description' => ['nullable','string'],
+            'user_id' => ['required','integer', Rule::exist('users', 'id')],
+            'client_id' => ['required','integer', Rule::exist('clients', 'id')],
+            'deadline_at' => ['nullable','date'],
+            'status' => ['nullable', Rule::enum(StatusEnum::class)],
+        ];
+    }
+}
