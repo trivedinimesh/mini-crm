@@ -7,6 +7,8 @@ use App\Models\User;
 use App\Models\Client;
 use App\Http\Requests\StoreProjectRequest;
 use App\Http\Requests\UpdateProjectRequest;
+use Illuminate\Support\Facades\Gate;
+use App\PermissionEnum;
 
 class ProjectController extends Controller
 {
@@ -34,7 +36,7 @@ class ProjectController extends Controller
      */
     public function store(StoreProjectRequest $request)
     {
-        $project = Studend::create($request->validated());
+        Project::create($request->validated());
         return redirect()->route('projects.index')->with('message', 'Project created successfully');
     }
 
@@ -70,6 +72,7 @@ class ProjectController extends Controller
      */
     public function destroy(Project $project)
     {
+        Gate::authorize(PermissionEnum::DELETE_PROJECTS->value);
         $project->delete();
         return redirect()->route('projects.index')->with('message', 'Project deleted successfully');
     }

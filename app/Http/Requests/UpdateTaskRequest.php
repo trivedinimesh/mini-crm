@@ -4,9 +4,9 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
-use App\StatusEnum;
+use App\TaskStatusEnum;
 
-class StoreProjectRequest extends FormRequest
+class UpdateTaskRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -28,8 +28,9 @@ class StoreProjectRequest extends FormRequest
             'description' => ['required','string'],
             'user_id' => ['required','integer', Rule::exist('users', 'id')],
             'client_id' => ['required','integer', Rule::exist('clients', 'id')],
+            'project_id' => ['required','integer', Rule::exist('projects', 'id')],
             'deadline_at' => ['required','date'],
-            'status' => ['required', Rule::enum(StatusEnum::class)],
+            'status' => ['required', Rule::enum(TaskStatusEnum::class)],
         ];
     }
 }

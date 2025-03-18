@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\Client;
 use App\Http\Requests\StoreClientRequest;
 use App\Http\Requests\UpdateClientRequest;
+use Illuminate\Support\Facades\Gate;
+use App\PermissionEnum;
 
 class ClientController extends Controller
 {
@@ -64,6 +66,7 @@ class ClientController extends Controller
      */
     public function destroy(Client $client)
     {
+        Gate::authorize(PermissionEnum::DELETE_CLIENTS->value);
         $client->delete();
         return redirect()->route('clients.index')->with('message', 'Client deleted successfully');
     }
