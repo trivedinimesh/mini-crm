@@ -32,4 +32,16 @@ class StoreProjectRequest extends FormRequest
             'status' => ['required', Rule::enum(StatusEnum::class)],
         ];
     }
+
+    protected function prepareForValidation()
+    {
+        $this->merge([
+            'title' => strip_tags($this->input('title')),
+            'description' => strip_tags($this->input('description')),
+            'user_id' => strip_tags($this->input('user_id')),
+            'client_id' => strip_tags($this->input('client_id')),
+            'deadline_at' => strip_tags($this->input('deadline_at')),
+            'status' => strip_tags($this->input('status')),
+        ]);
+    }
 }

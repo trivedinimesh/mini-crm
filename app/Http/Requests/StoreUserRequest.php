@@ -29,4 +29,14 @@ class StoreUserRequest extends FormRequest
             'password' => ['required','confirmed','min:6'],
         ];
     }
+
+    protected function prepareForValidation()
+    {
+        $this->merge([
+            'first_name' => strip_tags($this->input('first_name')),
+            'last_name' => strip_tags($this->input('last_name')),
+            'email' => strip_tags($this->input('email')),
+            'password' => strip_tags($this->input('password')),
+        ]);
+    }
 }

@@ -37,4 +37,9 @@ class Project extends Model
             'status' => StatusEnum::class,
         ];
     }
+
+    public function tasks()
+    {
+        return $this->hasMany(Task::class);
+    }
 }

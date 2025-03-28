@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\Task;
+use App\Models\User;
+use App\Models\Project;
+use App\Models\Client;
 use App\Http\Requests\StoreTaskRequest;
 use App\Http\Requests\UpdateTaskRequest;
 use Illuminate\Support\Facades\Gate;
@@ -24,7 +27,7 @@ class TaskController extends Controller
      */
     public function create()
     {
-        $user = User::select(['id', 'first_name', 'last_name'])->get();
+        $users = User::select(['id', 'first_name', 'last_name'])->get();
         $projects = Project::select(['id', 'title'])->get();
         $clients = Client::select(['id', 'company_name'])->get();
         return view('tasks.create', compact('users', 'projects', 'clients'));
@@ -44,7 +47,8 @@ class TaskController extends Controller
      */
     public function show(Task $task)
     {
-        //
+        $task->load('user', 'project', 'client');
+        return view('tasks.show', compact('task'));
     }
 
     /**

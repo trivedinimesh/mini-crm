@@ -27,4 +27,13 @@ class ProfileUpdateRequest extends FormRequest
             ],
         ];
     }
+
+    protected function prepareForValidation()
+    {
+        // Sanitize inputs to prevent XSS
+        $this->merge([
+            'name' => strip_tags($this->input('name')),
+            'email' => strip_tags($this->input('email')),
+        ]);
+    }
 }

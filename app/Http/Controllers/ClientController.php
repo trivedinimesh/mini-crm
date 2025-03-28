@@ -41,6 +41,7 @@ class ClientController extends Controller
      */
     public function show(Client $client)
     {
+        $client->load('projects', 'tasks');
         return view('clients.show', compact('client'));
     }
 

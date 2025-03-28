@@ -21,4 +21,14 @@ class Client extends Model
         'company_zip',
         'company_vat',
     ];
+
+    public function projects()
+    {
+        return $this->HasMany(Project::class);
+    }
+
+    public function tasks()
+    {
+        return $this->HasMany(Task::class);
+    }
 }

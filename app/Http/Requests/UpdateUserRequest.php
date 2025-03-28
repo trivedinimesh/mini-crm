@@ -28,4 +28,14 @@ class UpdateUserRequest extends FormRequest
             'email' => ['required','email',Rule::unique('users')->ignore($this->user)],
         ];
     }
+    
+    protected function prepareForValidation()
+    {
+        $this->merge([
+            'first_name' => strip_tags($this->input('first_name')),
+            'last_name' => strip_tags($this->input('last_name')),
+            'email' => strip_tags($this->input('email')),
+            'password' => strip_tags($this->input('password')),
+        ]);
+    }
 }

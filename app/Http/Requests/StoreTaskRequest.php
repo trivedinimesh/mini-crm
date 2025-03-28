@@ -28,9 +28,22 @@ class StoreTaskRequest extends FormRequest
             'description' => ['required','string'],
             'user_id' => ['required','integer', Rule::exist('users', 'id')],
             'client_id' => ['required','integer', Rule::exist('clients', 'id')],
-            'project_id' => ['required','integer', Rule::exist('projects', 'id')],
+            'project_id' => ['nullable','integer', Rule::exist('projects', 'id')],
             'deadline_at' => ['required','date'],
             'status' => ['required', Rule::enum(TaskStatusEnum::class)],
         ];
+    }
+
+    protected function prepareForValidation()
+    {
+        $this->merge([
+            'title' => strip_tags($this->input('title')),
+            'description' => strip_tags($this->input('description')),
+            'user_id' => strip_tags($this->input('user_id')),
+            'client_id' => strip_tags($this->input('client_id')),
+            'project_id' => strip_tags($this->input('project_id')),
+            'deadline_at' => strip_tags($this->input('deadline_at')),
+            'status' => strip_tags($this->input('status')),
+        ]);
     }
 }

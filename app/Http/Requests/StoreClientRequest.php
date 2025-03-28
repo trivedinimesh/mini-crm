@@ -33,4 +33,18 @@ class StoreClientRequest extends FormRequest
             'company_vat' => ['required','string','max:20'],
         ];
     }
+
+    protected function prepareForValidation()
+    {
+        $this->merge([
+            'contact_name' => strip_tags($this->input('contact_name')),
+            'contact_email' => strip_tags($this->input('contact_email')),
+            'contact_phone_number' => strip_tags($this->input('contact_phone_number')),
+            'company_name' => strip_tags($this->input('company_name')),
+            'company_address' => strip_tags($this->input('company_address')),
+            'company_city' => strip_tags($this->input('company_city')),
+            'company_zip' => strip_tags($this->input('company_zip')),
+            'company_vat' => strip_tags($this->input('company_vat')),
+        ]);
+    }
 }

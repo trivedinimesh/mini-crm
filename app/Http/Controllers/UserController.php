@@ -42,7 +42,8 @@ class UserController extends Controller
      */
     public function show(User $user)
     {
-        //
+        $user->load('projects', 'tasks');
+        return view('users.show', compact('user'));
     }
 
     /**

@@ -21,9 +21,6 @@
                                         User
                                     </th>
                                     <th scope="col" class="px-6 py-3">
-                                        Client
-                                    </th>
-                                    <th scope="col" class="px-6 py-3">
                                         Project
                                     </th>
                                     <th scope="col" class="px-6 py-3">
@@ -47,9 +44,6 @@
                                             {{ $task->user->first_name }}
                                         </td>
                                         <td class="px-6 py-4">
-                                            {{ $task->client->company_name }}
-                                        </td>
-                                        <td class="px-6 py-4">
                                             {{ $task->project->title }}
                                         </td>
                                         <td class="px-6 py-4">
@@ -59,6 +53,8 @@
                                             {{ $task->status }}
                                         </td>
                                         <td class="px-6 py-4 text-right">
+                                            <a href="{{ route('tasks.show', $task) }}" class="font-medium text-blue-600 hover:underline">View</a>
+                                            <span class="font-medium text-blue-600">/</span>
                                             <a href="{{ route('tasks.edit', $task) }}" class="font-medium text-blue-600 hover:underline">Edit</a>
                                             @can(App\PermissionEnum::DELETE_TASKS)
                                             <span class="font-medium text-blue-600">/</span>

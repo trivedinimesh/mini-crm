@@ -53,6 +53,8 @@
                                             {{ $project->status }}
                                         </td>
                                         <td class="px-6 py-4 text-right">
+                                            <a href="{{ route('projects.show', $project) }}" class="font-medium text-blue-600 hover:underline">View</a>
+                                            <span class="font-medium text-blue-600">/</span>
                                             <a href="{{ route('projects.edit', $project) }}" class="font-medium text-blue-600 hover:underline">Edit</a>
                                             @can(App\PermissionEnum::DELETE_PROJECTS)
                                             <span class="font-medium text-blue-600">/</span>

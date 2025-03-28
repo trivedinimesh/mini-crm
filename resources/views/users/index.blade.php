@@ -41,6 +41,8 @@
                                             {{ $user->email }}
                                         </td>
                                         <td class="px-6 py-4 text-right">
+                                            <a href="{{ route('users.show', $user) }}" class="font-medium text-blue-600 hover:underline">View</a>
+                                            <span class="font-medium text-blue-600">/</span>
                                             <a href="{{ route('users.edit', $user) }}" class="font-medium text-blue-600 hover:underline">Edit</a>
                                             <span class="font-medium text-blue-600">/</span>
                                             <form method="POST" 
